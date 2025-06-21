@@ -61,7 +61,7 @@ const navItems = [
               href={item.href}
               label={item.label}
               icon={item.icon}
-              isActive={currentPage === item.href}
+              isActive={false} /* Removed active state comparison */
               activeColor="text-pink-600"
               inactiveColor="text-gray-600"
               hoverColor="hover:text-pink-600"
@@ -167,11 +167,7 @@ const navItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class={`flex items-center px-6 py-5 text-lg font-medium transition-colors border-b border-gray-100 bg-white ${
-                currentPage === item.href
-                  ? "text-pink-600"
-                  : "text-gray-700 hover:text-pink-600"
-              }`}
+              class="flex items-center px-6 py-5 text-lg font-medium transition-colors border-b border-gray-100 bg-white text-gray-700 hover:text-pink-600"
             >
               <svg
                 class="mr-4 h-6 w-6"
