@@ -108,7 +108,7 @@ const trendingTopics = [
 ---
 
 <aside
-  class={`w-96 bg-white border-l border-gray-200 p-6 overflow-y-auto ${className}`}
+  class={`w-[500px] bg-white border-l border-gray-200 p-6 overflow-y-auto ${className}`}
 >
   <!-- Who to Follow Section -->
   <div class="mb-8">
@@ -143,7 +143,7 @@ const trendingTopics = [
                 )}
               </div>
               <p class="text-sm text-gray-500 truncate">{profile.username}</p>
-              <p class="text-xs text-gray-600 mt-1 line-clamp-2">
+              <p class="text-sm text-gray-600 mt-1 line-clamp-3">
                 {profile.bio}
               </p>
               <p class="text-xs text-gray-500 mt-1">
@@ -220,6 +220,13 @@ const trendingTopics = [
   .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
