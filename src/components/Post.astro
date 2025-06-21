@@ -1,0 +1,147 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  showActions?: boolean;
+  compact?: boolean;
+}
+
+const { post, showActions = true, compact = false } = Astro.props;
+
+// Format date
+const formatDate = (date: Date) => {
+  const now = new Date();
+  const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+  
+  if (diffInHours < 1) {
+    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
+    return `${diffInMinutes}m`;
+  } else if (diffInHours < 24) {
+    return `${diffInHours}h`;
+  } else {
+    const diffInDays = Math.floor(diffInHours / 24);
+    return `${diffInDays}d`;
+  }
+};
+
+// Format numbers for display
+const formatNumber = (num: number) => {
+  if (num >= 1000000) {
+    return `${(num / 1000000).toFixed(1)}M`;
+  } else if (num >= 1000) {
+    return `${(num / 1000).toFixed(1)}K`;
+  }
+  return num.toString();
+};
+---
+
+<article class={`border-b border-gray-200 p-4 hover:bg-gray-50 transition-colors ${compact ? 'py-2' : ''}`}>
+  <!-- Retweet indicator -->
+  {post.data.isRetweet && (
+    <div class="flex items-center text-gray-500 text-sm mb-2">
+      <svg class="h-4 w-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.113 2.11c-.293.293-.293.768 0 1.06.146.147.338.22.53.22s.384-.073.53-.22l2.113-2.11c.293-.293.293-.767 0-1.06zM12.5 15.67c-.292-.293-.767-.293-1.06 0l-2.113 2.11c-.293.293-.293.768 0 1.06.146.147.338.22.53.22s.384-.073.53-.22l2.113-2.11c.293-.293.293-.767 0-1.06z"/>
+      </svg>
+      <span>{post.data.author.name} retweeted</span>
+    </div>
+  )}
+
+  <div class="flex space-x-3">
+    <!-- Author Avatar -->
+    <div class="flex-shrink-0">
+      <img 
+        src={post.data.author.avatar} 
+        alt={post.data.author.name}
+        class="h-10 w-10 rounded-full object-cover"
+      />
+    </div>
+
+    <!-- Post Content -->
+    <div class="flex-1 min-w-0">
+      <!-- Post Header -->
+      <div class="flex items-center space-x-2 mb-1">
+        <span class="font-semibold text-gray-900">{post.data.author.name}</span>
+        {post.data.author.verified && (
+          <svg class="h-4 w-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        )}
+        <span class="text-gray-500">{post.data.author.username}</span>
+        <span class="text-gray-500">·</span>
+        <span class="text-gray-500">{formatDate(post.data.publishedAt)}</span>
+      </div>
+
+      <!-- Retweeted content -->
+      {post.data.isRetweet && post.data.originalPost && (
+        <div class="border border-gray-200 rounded-lg p-3 mb-3 bg-gray-50">
+          <div class="flex items-center space-x-2 mb-2">
+            <span class="font-semibold text-gray-900">{post.data.originalPost.author.name}</span>
+            <span class="text-gray-500">{post.data.originalPost.author.username}</span>
+          </div>
+          <p class="text-gray-900">{post.data.originalPost.content}</p>
+        </div>
+      )}
+
+      <!-- Post Content -->
+      <div class="prose prose-sm max-w-none mb-3">
+        <slot />
+      </div>
+
+      <!-- Post Image -->
+      {post.data.image && (
+        <div class="mb-3">
+          <img 
+            src={post.data.image} 
+            alt="Post image"
+            class="rounded-lg max-h-96 w-full object-cover"
+          />
+        </div>
+      )}
+
+      <!-- Post Actions -->
+      {showActions && (
+        <div class="flex items-center justify-between text-gray-500 text-sm">
+          <!-- Reply -->
+          <button class="flex items-center space-x-2 hover:text-blue-500 transition-colors group">
+            <div class="p-2 rounded-full group-hover:bg-blue-50">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+              </svg>
+            </div>
+            <span>{formatNumber(post.data.replies)}</span>
+          </button>
+
+          <!-- Retweet -->
+          <button class="flex items-center space-x-2 hover:text-green-500 transition-colors group">
+            <div class="p-2 rounded-full group-hover:bg-green-50">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+            </div>
+            <span>{formatNumber(post.data.retweets)}</span>
+          </button>
+
+          <!-- Like -->
+          <button class="flex items-center space-x-2 hover:text-red-500 transition-colors group">
+            <div class="p-2 rounded-full group-hover:bg-red-50">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            </div>
+            <span>{formatNumber(post.data.likes)}</span>
+          </button>
+
+          <!-- Share -->
+          <button class="flex items-center space-x-2 hover:text-blue-500 transition-colors group">
+            <div class="p-2 rounded-full group-hover:bg-blue-50">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+              </svg>
+            </div>
+          </button>
+        </div>
+      )}
+    </div>
+  </div>
+</article> 

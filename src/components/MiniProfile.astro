@@ -1,0 +1,54 @@
+---
+interface Props {
+  user: {
+    name: string;
+    avatar: string;
+    verified?: boolean;
+    username?: string;
+  };
+  showUsername?: boolean;
+  avatarSize?: string;
+  textSize?: string;
+  hoverBgColor?: string;
+  textColor?: string;
+  usernameColor?: string;
+  dropdownIconColor?: string;
+}
+
+const { 
+  user, 
+  showUsername = true,
+  avatarSize = "h-8 w-8",
+  textSize = "text-sm",
+  hoverBgColor = "hover:bg-gray-100",
+  textColor = "text-gray-900",
+  usernameColor = "text-gray-500",
+  dropdownIconColor = "text-gray-400"
+} = Astro.props;
+
+const username = user.username || `@${user.name.toLowerCase().replace(/\s+/g, '')}`;
+---
+
+<button class={`flex items-center space-x-2 p-2 rounded-full ${hoverBgColor} transition-colors`}>
+  <img 
+    src={user.avatar} 
+    alt={user.name}
+    class={`${avatarSize} rounded-full object-cover`}
+  />
+  {showUsername && (
+    <div class="hidden lg:block text-left">
+      <div class="flex items-center space-x-1">
+        <span class={`${textSize} font-medium ${textColor}`}>{user.name}</span>
+        {user.verified && (
+          <svg class="h-4 w-4 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        )}
+      </div>
+      <span class={`text-xs ${usernameColor}`}>{username}</span>
+    </div>
+  )}
+  <svg class={`h-4 w-4 ${dropdownIconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+  </svg>
+</button> 

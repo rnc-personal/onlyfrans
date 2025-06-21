@@ -1,0 +1,22 @@
+---
+interface Props {
+  brandName?: string;
+  logoColor?: string;
+  textColor?: string;
+  href?: string;
+}
+
+const { 
+  brandName = "OnlyFrans", 
+  logoColor = "text-pink-500", 
+  textColor = "text-gray-900",
+  href = "/"
+} = Astro.props;
+---
+
+<a href={href} class="flex items-center space-x-2">
+  <svg class={`h-8 w-8 ${logoColor}`} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+  </svg>
+  <span class={`text-xl font-bold ${textColor}`}>{brandName}</span>
+</a> 

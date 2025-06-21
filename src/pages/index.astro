@@ -1,16 +1,26 @@
 ---
+import MainLayout from "../layouts/MainLayout.astro";
+import PostFeed from "../components/PostFeed.astro";
 
+// Sample user data for demonstration
+const sampleUser = {
+  name: "Fran",
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+  verified: true,
+  username: "@fran_official"
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title="OnlyFrans - Exclusive Content Platform" user={sampleUser} currentPage="/">
+  <div class="max-w-2xl mx-auto">
+    <!-- Timeline Header -->
+    <div class="sticky top-16 z-40 bg-white/95 backdrop-blur border-b border-gray-200 px-4 py-3">
+      <h1 class="text-xl font-bold text-gray-900">Fran's Exclusive Content</h1>
+    </div>
+    
+    <!-- Post Feed -->
+    <PostFeed limit={2} showLoadMore={true} />
+  </div>
+</MainLayout>
+
+

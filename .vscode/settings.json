@@ -1,0 +1,10 @@
+{
+  "emmet.includeLanguages": {
+    "astro": "html"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.preferences": {
+    "output.selfClosingStyle": "xhtml"
+  }
+} 

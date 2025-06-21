@@ -1,0 +1,167 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Logo from "../components/Logo.astro";
+import NavLink from "../components/NavLink.astro";
+import Search from "../components/Search.astro";
+import ActionButton from "../components/ActionButton.astro";
+import MiniProfile from "../components/MiniProfile.astro";
+
+const sampleUser = {
+  name: "Jane Smith",
+  avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+  verified: true,
+  username: "@janesmith"
+};
+---
+
+<MainLayout title="Component Library" currentPage="/components">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Component Library</h1>
+    
+    <!-- Logo Component Demo -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Logo Component</h2>
+      <div class="bg-white border border-gray-200 rounded-lg p-6 space-y-4">
+        <div class="flex items-center space-x-4">
+          <Logo />
+          <Logo brandName="MyApp" logoColor="text-green-500" />
+          <Logo brandName="Brand" logoColor="text-purple-500" textColor="text-purple-900" />
+        </div>
+      </div>
+    </section>
+
+    <!-- NavLink Component Demo -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">NavLink Component</h2>
+      <div class="bg-white border border-gray-200 rounded-lg p-6">
+        <div class="flex flex-wrap gap-4">
+          <NavLink 
+            href="/home" 
+            label="Home" 
+            icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>'
+            isActive={true}
+          />
+          <NavLink 
+            href="/explore" 
+            label="Explore" 
+            icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>'
+          />
+          <NavLink 
+            href="/profile" 
+            label="Profile" 
+            icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>'
+            activeColor="text-blue-600"
+            inactiveColor="text-gray-500"
+            hoverColor="hover:text-blue-600"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Component Demo -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Search Component</h2>
+      <div class="bg-white border border-gray-200 rounded-lg p-6 space-y-4">
+        <div class="max-w-md">
+          <Search />
+        </div>
+        <div class="max-w-md">
+          <Search 
+            placeholder="Search users..." 
+            borderColor="border-blue-300"
+            focusRingColor="focus:ring-blue-500"
+          />
+        </div>
+        <div class="max-w-md">
+          <Search 
+            placeholder="Search with custom styling" 
+            borderColor="border-purple-300"
+            bgColor="bg-purple-50"
+            focusRingColor="focus:ring-purple-500"
+            iconColor="text-purple-400"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ActionButton Component Demo -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">ActionButton Component</h2>
+      <div class="bg-white border border-gray-200 rounded-lg p-6">
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-lg font-medium text-gray-900 mb-3">Variants</h3>
+            <div class="flex flex-wrap gap-3">
+              <ActionButton label="Primary" variant="primary" />
+              <ActionButton label="Secondary" variant="secondary" />
+              <ActionButton label="Outline" variant="outline" />
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-medium text-gray-900 mb-3">Sizes</h3>
+            <div class="flex flex-wrap items-center gap-3">
+              <ActionButton label="Small" size="sm" />
+              <ActionButton label="Medium" size="md" />
+              <ActionButton label="Large" size="lg" />
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-medium text-gray-900 mb-3">With Icons</h3>
+            <div class="flex flex-wrap gap-3">
+              <ActionButton 
+                label="Tweet" 
+                icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>'
+                variant="primary"
+              />
+              <ActionButton 
+                label="Download" 
+                icon='<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>'
+                variant="outline"
+              />
+            </div>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-medium text-gray-900 mb-3">States</h3>
+            <div class="flex flex-wrap gap-3">
+              <ActionButton label="Normal" />
+              <ActionButton label="Disabled" disabled={true} />
+              <ActionButton label="Full Width" fullWidth={true} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MiniProfile Component Demo -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">MiniProfile Component</h2>
+      <div class="bg-white border border-gray-200 rounded-lg p-6">
+        <div class="flex flex-wrap gap-4">
+          <MiniProfile user={sampleUser} />
+          <MiniProfile 
+            user={{
+              name: "Alex Johnson",
+              avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+              verified: false,
+              username: "@alexj"
+            }}
+            showUsername={false}
+          />
+          <MiniProfile 
+            user={{
+              name: "Sarah Wilson",
+              avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+              verified: true,
+              username: "@sarahw"
+            }}
+            avatarSize="h-12 w-12"
+            textSize="text-base"
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout> 

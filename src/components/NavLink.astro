@@ -1,0 +1,32 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  icon: string;
+  isActive?: boolean;
+  iconSize?: string;
+  textSize?: string;
+  activeColor?: string;
+  inactiveColor?: string;
+  hoverColor?: string;
+}
+
+const { 
+  href, 
+  label, 
+  icon, 
+  isActive = false,
+  iconSize = "h-5 w-5",
+  textSize = "text-sm",
+  activeColor = "text-gray-900",
+  inactiveColor = "text-gray-600",
+  hoverColor = "hover:text-gray-900"
+} = Astro.props;
+
+const textColor = isActive ? activeColor : inactiveColor;
+---
+
+<a href={href} class={`flex items-center space-x-2 px-3 py-2 ${textSize} font-medium ${textColor} ${hoverColor} transition-colors`}>
+  <svg class={iconSize} fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={icon} />
+  <span>{label}</span>
+</a> 

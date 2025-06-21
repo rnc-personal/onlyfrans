@@ -1,0 +1,78 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import MessagesPopup from "../components/MessagesPopup.astro";
+import SideBar from "../components/SideBar.astro";
+
+interface Props {
+  title?: string;
+  user?: {
+    name: string;
+    username: string;
+    avatar: string;
+    verified: boolean;
+  };
+  currentPage?: string;
+  description?: string;
+}
+
+const { title = "OnlyFrans - Exclusive Content Platform", user, currentPage = "/", description = "OnlyFrans - Fran's Exclusive Content" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-white text-gray-900 min-h-screen">
+    <Header user={user} currentPage={currentPage} />
+    
+    <div class="flex pt-16 min-h-screen">
+      <!-- Left Sidebar (Navigation) - Hidden on mobile -->
+      <div class="hidden lg:block w-64 bg-white border-r border-gray-200 p-6">
+        <nav class="space-y-2">
+          <a href="/" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"/>
+            </svg>
+            <span class="font-medium">Home</span>
+          </a>
+          <a href="/subscriptions" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+            </svg>
+            <span class="font-medium">Subscriptions</span>
+          </a>
+          <a href="/profile" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="h-6 w-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+            <span class="font-medium">Profile</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Main Content Area -->
+      <main class="flex-1 max-w-2xl mx-auto">
+        <slot />
+      </main>
+
+      <!-- Right Sidebar -->
+      <SideBar class="hidden xl:block" />
+    </div>
+
+    <MessagesPopup />
+  </body>
+</html>
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+</style>
