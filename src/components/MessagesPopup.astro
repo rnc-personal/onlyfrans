@@ -11,61 +11,71 @@ const messages = [
     id: 1,
     user: {
       name: "Coffee Queen ☕",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=40&h=40&fit=crop&crop=face",
-      online: true
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      online: true,
     },
-    lastMessage: "Your morning routine is so inspiring! Can't wait to see what you're brewing today 😍",
+    lastMessage:
+      "Your morning routine is so inspiring! Can't wait to see what you're brewing today 😍",
     time: "2m ago",
-    unread: true
+    unread: true,
   },
   {
     id: 2,
     user: {
       name: "Garden Goddess 🌸",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
-      online: false
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face",
+      online: false,
     },
-    lastMessage: "Those tomatoes look absolutely delicious... I'd love to taste them sometime 😉",
+    lastMessage:
+      "Those tomatoes look absolutely delicious... I'd love to taste them sometime 😉",
     time: "15m ago",
-    unread: false
+    unread: false,
   },
   {
     id: 3,
     user: {
       name: "Pasta Princess 🍝",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face",
-      online: true
+      avatar:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=40&h=40&fit=crop&crop=face",
+      online: true,
     },
-    lastMessage: "Your secret recipe has me craving more... when's the next cooking session? 🔥",
+    lastMessage:
+      "Your secret recipe has me craving more... when's the next cooking session? 🔥",
     time: "1h ago",
-    unread: true
+    unread: true,
   },
   {
     id: 4,
     user: {
       name: "Workout Warrior 💪",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
-      online: false
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face",
+      online: false,
     },
-    lastMessage: "Those squats are looking amazing! Your form is perfect... want to spot me? 😏",
+    lastMessage:
+      "Those squats are looking amazing! Your form is perfect... want to spot me? 😏",
     time: "3h ago",
-    unread: false
+    unread: false,
   },
   {
     id: 5,
     user: {
       name: "Bookworm Betty 📚",
-      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=40&h=40&fit=crop&crop=face",
-      online: true
+      avatar:
+        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=40&h=40&fit=crop&crop=face",
+      online: true,
     },
-    lastMessage: "Your reading recommendations are always so... stimulating. What's next on your list? 😊",
+    lastMessage:
+      "Your reading recommendations are always so... stimulating. What's next on your list? 😊",
     time: "5h ago",
-    unread: false
-  }
+    unread: false,
+  },
 ];
 ---
 
-<div 
+<div
   id={id}
   class="fixed bottom-4 right-4 w-80 bg-white rounded-lg shadow-2xl border border-gray-200 transform translate-y-full opacity-0 transition-all duration-300 ease-out z-50"
   style="max-height: 500px;"
@@ -73,55 +83,70 @@ const messages = [
   <!-- Header -->
   <div class="flex items-center justify-between p-4 border-b border-gray-200">
     <h3 class="text-lg font-semibold text-gray-900">Messages</h3>
-    <button 
+    <button
       id="close-messages"
       class="text-gray-400 hover:text-gray-600 transition-colors"
       aria-label="Close messages"
     >
-      <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      <svg
+        class="h-5 w-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
   </div>
 
   <!-- Messages List -->
   <div class="overflow-y-auto" style="max-height: 400px;">
-    {messages.map((message) => (
-      <div class="p-4 hover:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100 last:border-b-0">
-        <div class="flex items-start space-x-3">
-          <div class="relative flex-shrink-0">
-            <img 
-              src={message.user.avatar} 
-              alt={message.user.name}
-              class="h-10 w-10 rounded-full object-cover"
-            />
-            {message.user.online && (
-              <div class="absolute -bottom-1 -right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-white"></div>
-            )}
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="flex items-center justify-between mb-1">
-              <span class="font-medium text-gray-900 truncate">{message.user.name}</span>
-              <span class="text-xs text-gray-500">{message.time}</span>
+    {
+      messages.map((message) => (
+        <div class="p-4 hover:bg-gray-50 transition-colors cursor-pointer border-b border-gray-100 last:border-b-0">
+          <div class="flex items-start space-x-3">
+            <div class="relative flex-shrink-0">
+              <img
+                src={message.user.avatar}
+                alt={message.user.name}
+                class="h-10 w-10 rounded-full object-cover"
+              />
+              {message.user.online && (
+                <div class="absolute -bottom-1 -right-1 h-3 w-3 bg-green-500 rounded-full border-2 border-white" />
+              )}
             </div>
-            <p class="text-sm text-gray-600 truncate">
-              {message.lastMessage}
-            </p>
-            {message.unread && (
-              <div class="mt-1 flex items-center space-x-1">
-                <div class="h-2 w-2 bg-pink-500 rounded-full"></div>
-                <span class="text-xs text-pink-600 font-medium">New</span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between mb-1">
+                <span class="font-medium text-gray-900 truncate">
+                  {message.user.name}
+                </span>
+                <span class="text-xs text-gray-500">{message.time}</span>
               </div>
-            )}
+              <p class="text-sm text-gray-600 truncate">
+                {message.lastMessage}
+              </p>
+              {message.unread && (
+                <div class="mt-1 flex items-center space-x-1">
+                  <div class="h-2 w-2 bg-pink-500 rounded-full" />
+                  <span class="text-xs text-pink-600 font-medium">New</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 
   <!-- Footer -->
   <div class="p-3 border-t border-gray-200 bg-gray-50 rounded-b-lg">
-    <button class="w-full text-center text-sm text-pink-600 hover:text-pink-700 font-medium transition-colors">
+    <button
+      class="w-full text-center text-sm text-pink-600 hover:text-pink-700 font-medium transition-colors"
+    >
       View all messages
     </button>
   </div>
@@ -129,48 +154,53 @@ const messages = [
 
 <script>
   // Messages popup functionality
-  const messagesPopup = document.getElementById('messages-popup');
-  const closeMessagesBtn = document.getElementById('close-messages');
+  const messagesPopup = document.getElementById("messages-popup");
+  const closeMessagesBtn = document.getElementById("close-messages");
   const messagesLink = document.querySelector('a[href="/messages"]');
 
   function showMessages() {
     if (messagesPopup) {
-      messagesPopup.classList.remove('translate-y-full', 'opacity-0');
-      messagesPopup.classList.add('translate-y-0', 'opacity-100');
+      messagesPopup.classList.remove("translate-y-full", "opacity-0");
+      messagesPopup.classList.add("translate-y-0", "opacity-100");
     }
   }
 
   function hideMessages() {
     if (messagesPopup) {
-      messagesPopup.classList.add('translate-y-full', 'opacity-0');
-      messagesPopup.classList.remove('translate-y-0', 'opacity-100');
+      messagesPopup.classList.add("translate-y-full", "opacity-0");
+      messagesPopup.classList.remove("translate-y-0", "opacity-100");
     }
   }
 
   // Event listeners
   if (messagesLink) {
-    messagesLink.addEventListener('click', (e) => {
+    messagesLink.addEventListener("click", (e) => {
       e.preventDefault();
       showMessages();
     });
   }
 
   if (closeMessagesBtn) {
-    closeMessagesBtn.addEventListener('click', hideMessages);
+    closeMessagesBtn.addEventListener("click", hideMessages);
   }
 
   // Close on outside click
-  document.addEventListener('click', (e) => {
-    if (messagesPopup && !messagesPopup.contains(e.target as Node) && 
-        messagesLink && !messagesLink.contains(e.target as Node)) {
+  document.addEventListener("click", (e) => {
+    if (
+      messagesPopup &&
+      !messagesPopup.contains(e.target as Node) &&
+      messagesLink &&
+      !messagesLink.contains(e.target as Node)
+    ) {
       hideMessages();
     }
   });
 
   // Close on escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       hideMessages();
     }
   });
-</script> 
+</script>
+
